@@ -53,5 +53,7 @@ parse = (text, priorities = defaultPrio) ->
     .max "score"
     .parsed
 
-module.exports = parse
+module.exports = (text, prio) ->
+  res = parse text, prio
+  res ?= NaN
     

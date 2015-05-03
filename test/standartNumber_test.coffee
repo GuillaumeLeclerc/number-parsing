@@ -34,3 +34,8 @@ module.exports =
     test.strictEqual parser("1,123", {us : 1}), 1123
     test.strictEqual parser("1,123", {fr : 1}), 1.123
     test.done()
+  testBadNumbers : (test) ->
+    test.expect 2
+    test.ok isNaN(parser("aaa"))
+    test.ok isNaN(parser("USD"))
+    test.done()

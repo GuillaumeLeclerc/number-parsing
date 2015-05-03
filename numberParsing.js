@@ -60,6 +60,10 @@
     }).max("score").parsed;
   };
 
-  module.exports = parse;
+  module.exports = function(text, prio) {
+    var res;
+    res = parse(text, prio);
+    return res != null ? res : res = NaN;
+  };
 
 }).call(this);
