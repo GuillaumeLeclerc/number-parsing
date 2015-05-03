@@ -67,4 +67,10 @@ module.exports = [
     sep : "'"
     decimalSep : "."
   }
+  {
+    reg : /([0-9]{1,3}(?:\.[0-9]{3})*(?:'[0-9]+)?)/
+    countries : ["es"]
+    sep : "."
+    decimalSep : "'"
+  }
 ]

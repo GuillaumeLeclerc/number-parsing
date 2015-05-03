@@ -43,7 +43,7 @@
       return lodash(x).pluck("countries").flatten().uniq().value();
     }).map(function(value, index) {
       return {
-        parsed: index,
+        parsed: parseFloat(index),
         countries: value,
         length: index.replace(/[^0-9]/g, "").length
       };

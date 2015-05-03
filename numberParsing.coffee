@@ -39,7 +39,7 @@ parse = (text, priorities = defaultPrio) ->
         .value()
     .map (value, index) ->
       {
-        parsed : index
+        parsed : parseFloat index
         countries : value
         length : index.replace(/[^0-9]/g, "").length
       }
