@@ -1,0 +1,21 @@
+{
+  "name": "numberParsing",
+  "version": "0.0.0",
+  "description": "A tool to parse numbers from different locales",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GuillaumeLeclerc/numberParsing"
+  },
+  "keywords": [
+    "parseFloat",
+    "parseInt",
+    "node.js",
+    "javascript"
+  ],
+  "author": "Guillaume Leclerc",
+  "license": "MIT"
+}
