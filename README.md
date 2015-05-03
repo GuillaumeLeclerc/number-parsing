@@ -1,4 +1,4 @@
-# numberParsing
+# numberParsing ![Travis build status](https://travis-ci.org/GuillaumeLeclerc/numberParsing.svg?branch=master)
 
 When you are receiving data from all over the world you might encounter problems while using `parseFloat` or `parseInt`. This libraray is here to help you handling all locales with one single piece of code.
 
