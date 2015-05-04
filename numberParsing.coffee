@@ -12,12 +12,15 @@ allCountryCodes = lodash(formats)
 
 defaultPrio = lodash.zipObject(
   allCountryCodes,
-  lodash.times allCountryCodes.length, -> 1.0/allCountryCodes.length
+  lodash.times allCountryCodes.length, -> 1.0
 )
 
 parse = (text, priorities = defaultPrio) ->
   return text if lodash.isNumber(text)
   return NaN if not lodash.isString(text)
+
+  maxPrio = lodash.sum priorities
+  priorities = lodash.mapValues priorities, (p) -> p/maxPrio
 
   res = lodash(formats)
     .mapValues (l) ->

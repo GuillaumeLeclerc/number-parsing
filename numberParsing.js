@@ -12,11 +12,11 @@
   allCountryCodes = lodash(formats).pluck("countries").flatten().uniq().value();
 
   defaultPrio = lodash.zipObject(allCountryCodes, lodash.times(allCountryCodes.length, function() {
-    return 1.0 / allCountryCodes.length;
+    return 1.0;
   }));
 
   parse = function(text, priorities) {
-    var res;
+    var maxPrio, res;
     if (priorities == null) {
       priorities = defaultPrio;
     }
@@ -26,6 +26,10 @@
     if (!lodash.isString(text)) {
       return NaN;
     }
+    maxPrio = lodash.sum(priorities);
+    priorities = lodash.mapValues(priorities, function(p) {
+      return p / maxPrio;
+    });
     res = lodash(formats).mapValues(function(l) {
       var error, m;
       res = l.reg.exec(text);
