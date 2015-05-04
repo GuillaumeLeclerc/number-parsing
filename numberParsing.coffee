@@ -16,7 +16,10 @@ defaultPrio = lodash.zipObject(
 )
 
 parse = (text, priorities = defaultPrio) ->
-  lodash(formats)
+  return text if lodash.isNumber(text)
+  return NaN if not lodash.isString(text)
+
+  res = lodash(formats)
     .mapValues (l) ->
       res = l.reg.exec text
       if res isnt null
@@ -52,8 +55,7 @@ parse = (text, priorities = defaultPrio) ->
       v
     .max "score"
     .parsed
-
-module.exports = (text, prio) ->
-  res = parse text, prio
   res ?= NaN
-    
+  res
+
+module.exports = parse

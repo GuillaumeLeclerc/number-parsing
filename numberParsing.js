@@ -16,11 +16,18 @@
   }));
 
   parse = function(text, priorities) {
+    var res;
     if (priorities == null) {
       priorities = defaultPrio;
     }
-    return lodash(formats).mapValues(function(l) {
-      var error, m, res;
+    if (lodash.isNumber(text)) {
+      return text;
+    }
+    if (!lodash.isString(text)) {
+      return NaN;
+    }
+    res = lodash(formats).mapValues(function(l) {
+      var error, m;
       res = l.reg.exec(text);
       if (res !== null) {
         m = res[0].replace(new RegExp(escapeRegExp(l.sep), 'g'), "");
@@ -58,12 +65,12 @@
       delete v.countries;
       return v;
     }).max("score").parsed;
+    if (res == null) {
+      res = NaN;
+    }
+    return res;
   };
 
-  module.exports = function(text, prio) {
-    var res;
-    res = parse(text, prio);
-    return res != null ? res : res = NaN;
-  };
+  module.exports = parse;
 
 }).call(this);
