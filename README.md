@@ -1,6 +1,11 @@
-# number-parsing [![Build Status](https://travis-ci.org/GuillaumeLeclerc/numberParsing.svg?branch=master)](https://travis-ci.org/GuillaumeLeclerc/numberParsing)
+# number-parsing 
 
 When you are receiving data from all over the world you might encounter problems while using `parseFloat` or `parseInt`. This library is here to help you handling all locales with one single piece of code.
+
+## Build status
+
+### Master : [![Build Status](https://travis-ci.org/GuillaumeLeclerc/number-parsing.svg?branch=master)](https://travis-ci.org/GuillaumeLeclerc/number-parsing)
+### Latest release : [![Build Status](https://travis-ci.org/GuillaumeLeclerc/number-parsing.svg?branch=v0.3.0)](https://travis-ci.org/GuillaumeLeclerc/number-parsing)
 
 ## Install
 
@@ -48,3 +53,4 @@ You can also make suggestion about the main algorithm
 
 - Add a way to disable some formats (for example if you are sure you won't use a specific one)
 - Add a way to add new formats programmatically (if are parsing a non-standard format)
+- Add support for browser (and ad continuous intergration)
