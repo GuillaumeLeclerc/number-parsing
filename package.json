@@ -1,6 +1,6 @@
 {
   "name": "number-parsing",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A tool to parse numbers from different locales",
   "main": "numberParsing.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "author": "Guillaume Leclerc",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^3.8.0"
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "coffeelint": "^1.9.4",
