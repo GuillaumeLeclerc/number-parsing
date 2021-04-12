@@ -15,16 +15,13 @@
     return 1.0;
   }));
 
-  parse = function(text, priorities) {
+  parse = function(text, priorities = defaultPrio) {
     var maxPrio, ref, result;
-    if (priorities == null) {
-      priorities = defaultPrio;
-    }
     if (lodash.isNumber(text)) {
       return text;
     }
     if (!lodash.isString(text)) {
-      return NaN;
+      return 0/0;
     }
     maxPrio = lodash(priorities).values().sum();
     priorities = lodash.mapValues(priorities, function(p) {
@@ -39,8 +36,8 @@
         try {
           l.match = parseFloat(m);
           return l;
-        } catch (_error) {
-          error = _error;
+        } catch (error1) {
+          error = error1;
           return false;
         }
       } else {
@@ -70,7 +67,7 @@
       return v;
     }).maxBy("score")) != null ? ref.parsed : void 0;
     if (result == null) {
-      result = NaN;
+      result = 0/0;
     }
     return result;
   };
