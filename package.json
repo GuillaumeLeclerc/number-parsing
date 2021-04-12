@@ -1,6 +1,6 @@
 {
   "name": "number-parsing",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A tool to parse numbers from different locales",
   "main": "numberParsing.js",
   "scripts": {
