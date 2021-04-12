@@ -5,7 +5,7 @@ escapeRegExp = (string) ->
   return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1")
 
 allCountryCodes = lodash(formats)
-  .pluck "countries"
+  .map "countries"
   .flatten()
   .uniq()
   .value()
@@ -19,10 +19,10 @@ parse = (text, priorities = defaultPrio) ->
   return text if lodash.isNumber(text)
   return NaN if not lodash.isString(text)
 
-  maxPrio = lodash.sum priorities
+  maxPrio = lodash(priorities).values().sum()
   priorities = lodash.mapValues priorities, (p) -> p/maxPrio
 
-  res = lodash(formats)
+  result = lodash(formats)
     .mapValues (l) ->
       res = l.reg.exec text
       if res isnt null
@@ -39,7 +39,7 @@ parse = (text, priorities = defaultPrio) ->
     .groupBy (x) -> x.match
     .mapValues (x, index) ->
       lodash(x)
-        .pluck "countries"
+        .map "countries"
         .flatten()
         .uniq()
         .value()
@@ -49,16 +49,16 @@ parse = (text, priorities = defaultPrio) ->
         countries : value
         length : index.replace(/[^0-9]/g, "").length
       }
-    .mapValues (v) ->
+    .map (v) ->
       v.score = lodash(v.countries)
         .map (c) -> priorities?[c] ? 0
         .sum()
       v.score += v.length if v.score isnt 0
       delete v.countries
       v
-    .max "score"
-    .parsed
-  res ?= NaN
-  res
+    .maxBy "score"
+    ?.parsed
+  result ?= NaN
+  result
 
 module.exports = parse

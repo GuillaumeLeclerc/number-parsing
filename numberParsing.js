@@ -9,14 +9,14 @@
     return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
   };
 
-  allCountryCodes = lodash(formats).pluck("countries").flatten().uniq().value();
+  allCountryCodes = lodash(formats).map("countries").flatten().uniq().value();
 
   defaultPrio = lodash.zipObject(allCountryCodes, lodash.times(allCountryCodes.length, function() {
     return 1.0;
   }));
 
   parse = function(text, priorities) {
-    var maxPrio, res;
+    var maxPrio, ref, result;
     if (priorities == null) {
       priorities = defaultPrio;
     }
@@ -26,12 +26,12 @@
     if (!lodash.isString(text)) {
       return NaN;
     }
-    maxPrio = lodash.sum(priorities);
+    maxPrio = lodash(priorities).values().sum();
     priorities = lodash.mapValues(priorities, function(p) {
       return p / maxPrio;
     });
-    res = lodash(formats).mapValues(function(l) {
-      var error, m;
+    result = (ref = lodash(formats).mapValues(function(l) {
+      var error, m, res;
       res = l.reg.exec(text);
       if (res !== null) {
         m = res[0].replace(new RegExp(escapeRegExp(l.sep), 'g'), "");
@@ -51,28 +51,28 @@
     }).groupBy(function(x) {
       return x.match;
     }).mapValues(function(x, index) {
-      return lodash(x).pluck("countries").flatten().uniq().value();
+      return lodash(x).map("countries").flatten().uniq().value();
     }).map(function(value, index) {
       return {
         parsed: parseFloat(index),
         countries: value,
         length: index.replace(/[^0-9]/g, "").length
       };
-    }).mapValues(function(v) {
+    }).map(function(v) {
       v.score = lodash(v.countries).map(function(c) {
-        var ref;
-        return (ref = priorities != null ? priorities[c] : void 0) != null ? ref : 0;
+        var ref1;
+        return (ref1 = priorities != null ? priorities[c] : void 0) != null ? ref1 : 0;
       }).sum();
       if (v.score !== 0) {
         v.score += v.length;
       }
       delete v.countries;
       return v;
-    }).max("score").parsed;
-    if (res == null) {
-      res = NaN;
+    }).maxBy("score")) != null ? ref.parsed : void 0;
+    if (result == null) {
+      result = NaN;
     }
-    return res;
+    return result;
   };
 
   module.exports = parse;
